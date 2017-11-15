@@ -29,14 +29,14 @@ class RouterPlugin implements PluginInterface
 
         $request = $this->getRequest();
 
-        $container->add("routing", $map);
-        $container->add("routing.matcher", $matcher);
-        $container->add("routing.generator", $generator);
+        $container->add("map", $map);
+        $container->add("matcher", $matcher);
+        $container->add("generator", $generator);
         $container->add(RequestInterface::class, $request);
 
-        $container->addLazy("route", function(ContainerInterface $container){
-           $matcher = $container->get("routing.matcher");
-           $request = $container->get(RequestInterface::class);
+        $container->addLazy("route", function(ContainerInterface $containerInterface){
+           $matcher = $containerInterface->get("matcher");
+           $request = $containerInterface->get(RequestInterface::class);
            return $matcher->match($request);
         });
 

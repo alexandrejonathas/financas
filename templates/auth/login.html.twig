@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Autenticação do sistema
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="{{ route('auth.login')  }}">
+                        {% set submitIcon = 'floppy-disk' %}
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input class="form-control" type="text" placeholder="Email" name="email" value="{{ user.email }}">
+                        </div>
+                        {% if user.id is null %}
+                            <div class="form-group">
+                                <label class="control-label">Senha</label>
+                                <input class="form-control" type="password" placeholder="Senha" name="password" value="{{ user.password }}">
+                            </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
